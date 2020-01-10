@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AccountService} from '../service/account.service';
-import {IRegister} from '../interface/i-register';
 import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 function comparePassword(c: AbstractControl) {
@@ -36,13 +35,13 @@ export class RegisterComponent implements OnInit {
       console.log(value);
       this.accService.createAcc(value)
         .subscribe(next => {
-          console.log('day la cai no gui ve' + next);
+          console.log('day la cai no gui ve' + next.msg);
           this.registerForm.reset({
             email: '',
             password: '',
           });
-        }, (error: HttpErrorResponse) => {
-          console.log('This is::::', error);
+          this.message = next.msg;
+        }, error => {
           this.message = error.error.msg;
         }) ;
     }
