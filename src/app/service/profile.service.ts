@@ -13,8 +13,12 @@ export class ProfileService {
               private url: LinkAPIService) {
   }
 
+  getAllUser(): Observable<IProfile> {
+    return this.http.get<IProfile>(`${this.url.link}`);
+  }
+
   getOneAcc(id: number): Observable<IProfile> {
-    return this.http.get<IProfile>(`${this.url.link}/user/${id}`);
+    return this.http.get<IProfile>(`${this.url.link}/${id}`);
   }
 
   updateAcc(user: Partial<IProfile>): Observable<JwtResponse> {

@@ -11,7 +11,6 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  isLoggedIn = false;
   message: string;
   id: number;
   constructor(
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
-    this.tokenStorage.saveToken(this.tokenStorage.getTokenCookies());
+    this.tokenStorage.saveToken(this.tokenStorage.getToken());
   }
   onSubmit() {
     if (this.loginForm.valid) {
